@@ -13,6 +13,7 @@
 		5F74381224004A24006F79BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F74381124004A24006F79BF /* Assets.xcassets */; };
 		5F74381524004A24006F79BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F74381424004A24006F79BF /* Preview Assets.xcassets */; };
 		5F74381824004A24006F79BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F74381624004A24006F79BF /* LaunchScreen.storyboard */; };
+		5F74382024004BAE006F79BF /* MainWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74381F24004BAE006F79BF /* MainWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		5F74381424004A24006F79BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5F74381724004A24006F79BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F74381924004A24006F79BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F74381F24004BAE006F79BF /* MainWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				5F74380B24004A23006F79BF /* AppDelegate.swift */,
 				5F74380D24004A23006F79BF /* SceneDelegate.swift */,
 				5F74380F24004A23006F79BF /* ContentView.swift */,
+				5F74381F24004BAE006F79BF /* MainWebView.swift */,
 				5F74381124004A24006F79BF /* Assets.xcassets */,
 				5F74381624004A24006F79BF /* LaunchScreen.storyboard */,
 				5F74381924004A24006F79BF /* Info.plist */,
@@ -148,6 +151,7 @@
 			files = (
 				5F74380C24004A23006F79BF /* AppDelegate.swift in Sources */,
 				5F74380E24004A23006F79BF /* SceneDelegate.swift in Sources */,
+				5F74382024004BAE006F79BF /* MainWebView.swift in Sources */,
 				5F74381024004A23006F79BF /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

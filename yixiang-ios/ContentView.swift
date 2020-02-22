@@ -10,7 +10,18 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+        NavigationLink(destination: SubContentView()) {
+                Text("Show Next")
+                    .font(.title)
+            }
+        }
+    }
+}
+
+struct SubContentView: View {
+    var body: some View {
+        Text("show next")
     }
 }
 
