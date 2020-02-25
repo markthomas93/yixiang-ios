@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FRc-dT-won"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuR-ey-yav">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yuR-ey-yav">
+                                <rect key="frame" x="0.0" y="0.0" width="388" height="44"/>
                                 <color key="barTintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -29,28 +29,38 @@
                                 </items>
                             </navigationBar>
                             <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQg-Lc-0sX">
-                                <rect key="frame" x="-0.5" y="0.0" width="415" height="44"/>
+                                <rect key="frame" x="-4.5" y="-44" width="423" height="44"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <wkWebView contentMode="scaleToFill" id="4cG-F4-aMS">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CoY-7q-vF9"/>
-                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="centerX" secondItem="yuR-ey-yav" secondAttribute="centerX" id="GHV-MW-kUy"/>
-                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20.7322828464861" id="Ygm-3c-27V"/>
-                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="bottom" secondItem="yuR-ey-yav" secondAttribute="top" id="dhj-Zj-xrO"/>
-                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="bottom" secondItem="luV-p7-N8j" secondAttribute="bottom" id="khq-Pi-ZBc"/>
-                            <constraint firstItem="yuR-ey-yav" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vcG-Up-Qag"/>
-                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zuU-L7-r7l"/>
+                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-44" id="3bk-oC-Jjz"/>
+                            <constraint firstItem="yuR-ey-yav" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="4yD-SE-7Fh"/>
+                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="centerX" secondItem="yuR-ey-yav" secondAttribute="centerX" id="HbN-Uo-Qro"/>
+                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20.666666666666657" id="RHe-co-NMo"/>
+                            <constraint firstItem="yuR-ey-yav" firstAttribute="trailing" secondItem="4cG-F4-aMS" secondAttribute="trailing" id="ZeX-fe-66Y"/>
+                            <constraint firstItem="fQg-Lc-0sX" firstAttribute="bottom" secondItem="luV-p7-N8j" secondAttribute="bottom" id="iPl-Zj-ncT"/>
+                            <constraint firstItem="yuR-ey-yav" firstAttribute="leading" secondItem="4cG-F4-aMS" secondAttribute="leading" id="zC3-7u-VFb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="4cG-F4-aMS" id="D3Q-NB-s0y"/>
                         <outlet property="view" destination="fQg-Lc-0sX" id="cN5-dI-muU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.23188405797103" y="99.107142857142847"/>
+            <point key="canvasLocation" x="135.19999999999999" y="97.601199400299862"/>
         </scene>
     </scenes>
 </document>
