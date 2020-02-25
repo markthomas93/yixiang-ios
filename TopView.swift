@@ -8,12 +8,21 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TopView: View {
+    @ObservedObject var viewRouter = ViewRouter()
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
-                Text("Home")
+                if self.viewRouter.currentView == "home" {
+                    Text("Home")
+                } else if self.viewRouter.currentView == "experiment" {
+                    Text("experiment")
+                } else if self.viewRouter.currentView == "message" {
+                    Text("message")
+                } else if self.viewRouter.currentView == "user" {
+                    Text("user")
+                }
                 Spacer()
                 HStack {
                     Spacer()
@@ -21,25 +30,37 @@ struct ContentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
-                        .frame(width: geometry.size.width/6, height: 75)
+                        .frame(width: geometry.size.width/6, height: 82)
+                        .onTapGesture {
+                            self.viewRouter.currentView = "home"
+                        }
                     Spacer()
                     Image("experiment")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
-                    .frame(width: geometry.size.width/6, height: 75)
+                    .frame(width: geometry.size.width/6, height: 82)
+                    .onTapGesture {
+                        self.viewRouter.currentView = "experiment"
+                    }
                     Spacer()
                     Image("message")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
-                    .frame(width: geometry.size.width/6, height: 75)
+                    .frame(width: geometry.size.width/6, height: 82)
+                    .onTapGesture {
+                        self.viewRouter.currentView = "message"
+                    }
                     Spacer()
                     Image("user")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
-                    .frame(width: geometry.size.width/6, height: 75)
+                    .frame(width: geometry.size.width/6, height: 82)
+                    .onTapGesture {
+                        self.viewRouter.currentView = "user"
+                    }
                     Spacer()
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height/10)
@@ -52,7 +73,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TopView()
     }
 }
 
