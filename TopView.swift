@@ -10,12 +10,45 @@ import SwiftUI
 
 struct TopView: View {
     @ObservedObject var viewRouter = ViewRouter()
+    @ObservedObject var webViewStore = WebViewStore()
+    
+    var a: some View {
+      NavigationView {
+        WebView(webView: webViewStore.webView)
+          .navigationBarTitle(Text(verbatim: webViewStore.webView.title ?? ""), displayMode: .inline)
+          .navigationBarItems(trailing: HStack {
+            Button(action: goBack) {
+              Image(systemName: "chevron.left")
+                .imageScale(.large)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 32, height: 32)
+            }.disabled(!webViewStore.webView.canGoBack)
+            Button(action: goForward) {
+              Image(systemName: "chevron.right")
+                .imageScale(.large)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 32, height: 32)
+            }.disabled(!webViewStore.webView.canGoForward)
+          })
+      }.onAppear {
+        self.webViewStore.webView.load(URLRequest(url: URL(string: "https://yixiang.app")!))
+      }
+    }
+    
+    func goBack() {
+      webViewStore.webView.goBack()
+    }
+    
+    func goForward() {
+      webViewStore.webView.goForward()
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
                 if self.viewRouter.currentView == "home" {
-                    Text("Home")
+                    self.a
                 } else if self.viewRouter.currentView == "experiment" {
                     Text("experiment")
                 } else if self.viewRouter.currentView == "message" {
@@ -26,37 +59,57 @@ struct TopView: View {
                 Spacer()
                 HStack {
                     Spacer()
+                    VStack{
                     Image("home")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(20)
-                        .frame(width: geometry.size.width/6, height: 82)
-                        .onTapGesture {
-                            self.viewRouter.currentView = "home"
-                        }
+                        .frame(width: geometry.size.width/15, height: geometry.size.width/15)
+                    Text("主页")
+                        .font(.system(size: 11))
+                        .bold()
+                    }
+                    .frame(width: geometry.size.width/6, height: 82)
+                    .onTapGesture {
+                        self.viewRouter.currentView = "home"
+                    }
                     Spacer()
+                    VStack{
                     Image("experiment")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(20)
+                        .frame(width: geometry.size.width/15, height: geometry.size.width/15)
+                    Text("工具")
+                        .font(.system(size: 11))
+                        .bold()
+                    }
                     .frame(width: geometry.size.width/6, height: 82)
                     .onTapGesture {
                         self.viewRouter.currentView = "experiment"
                     }
                     Spacer()
+                    VStack{
                     Image("message")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(20)
+                        .frame(width: geometry.size.width/15, height: geometry.size.width/15)
+                    Text("信息")
+                        .font(.system(size: 11))
+                        .bold()
+                    }
                     .frame(width: geometry.size.width/6, height: 82)
                     .onTapGesture {
                         self.viewRouter.currentView = "message"
                     }
                     Spacer()
+                    VStack{
                     Image("user")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(20)
+                        .frame(width: geometry.size.width/15, height: geometry.size.width/15)
+                    Text("用户")
+                        .font(.system(size: 11))
+                        .bold()
+                    }
                     .frame(width: geometry.size.width/6, height: 82)
                     .onTapGesture {
                         self.viewRouter.currentView = "user"
