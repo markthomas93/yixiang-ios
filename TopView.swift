@@ -10,53 +10,10 @@ import SwiftUI
 
 struct TopView: View {
     @ObservedObject var viewRouter = ViewRouter()
-    @ObservedObject var webViewStore = WebViewStore()
-    
-    var a: some View {
-      NavigationView {
-        WebView(webView: webViewStore.webView)
-          .navigationBarTitle(Text(verbatim: webViewStore.webView.title ?? ""), displayMode: .inline)
-          .navigationBarItems(trailing: HStack {
-            Button(action: goBack) {
-              Image(systemName: "chevron.left")
-                .imageScale(.large)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
-            }.disabled(!webViewStore.webView.canGoBack)
-            Button(action: goForward) {
-              Image(systemName: "chevron.right")
-                .imageScale(.large)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
-            }.disabled(!webViewStore.webView.canGoForward)
-          })
-      }.onAppear {
-        self.webViewStore.webView.load(URLRequest(url: URL(string: "https://yixiang.app")!))
-      }
-    }
-    
-    func goBack() {
-      webViewStore.webView.goBack()
-    }
-    
-    func goForward() {
-      webViewStore.webView.goForward()
-    }
-    
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Spacer()
-                if self.viewRouter.currentView == "home" {
-                    self.a
-                } else if self.viewRouter.currentView == "experiment" {
-                    Text("experiment")
-                } else if self.viewRouter.currentView == "message" {
-                    Text("message")
-                } else if self.viewRouter.currentView == "user" {
-                    Text("user")
-                }
-                Spacer()
+                Text(self.viewRouter.currentView)
                 HStack {
                     Spacer()
                     VStack{
@@ -88,7 +45,7 @@ struct TopView: View {
                     }
                     Spacer()
                     VStack{
-                    Image("message")
+                    Image("message-1")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                         .frame(width: geometry.size.width/15, height: geometry.size.width/15)
