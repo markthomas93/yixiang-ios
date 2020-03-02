@@ -42,6 +42,7 @@ struct TopView: View {
         .font(.headline)
         .foregroundColor(.black)
         .accentColor(.black)
+        .edgesIgnoringSafeArea(.top)
         }
     }
 
@@ -53,28 +54,30 @@ struct ContentView_Previews: PreviewProvider {
 
 struct ContentView: View {
   @ObservedObject var webViewStore = WebViewStore()
-  
+  @State var items = [Item]()
   var body: some View {
-    NavigationView {
-      WebView(webView: webViewStore.webView)
-        .navigationBarTitle(Text(verbatim: webViewStore.webView.title ?? ""), displayMode: .inline)
-        .navigationBarItems(trailing: HStack {
-          Button(action: goBack) {
-            Image(systemName: "chevron.left")
-              .imageScale(.large)
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 32, height: 32)
-          }.disabled(!webViewStore.webView.canGoBack)
-          Button(action: goForward) {
-            Image(systemName: "chevron.right")
-              .imageScale(.large)
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 32, height: 32)
-          }.disabled(!webViewStore.webView.canGoForward)
-        })
-    }.onAppear {
-      self.webViewStore.webView.load(URLRequest(url: URL(string: "http://18.163.178.37/")!))
+    ZStack{
+        NavigationView {
+            List(items) { item in
+                Text(item.name)
+            }
+            .navigationBarTitle(Text("易乡"), displayMode: .inline)
+            .navigationBarItems(trailing:
+            HStack {
+                Button(action: {self.addTask()}) {
+                Image("")
+                }
+            Button(action: {self.addTask()}) {
+                Image("")
+                }
+            })
+            .background(NavigationConfigurator { nc in
+                nc.navigationBar.barTintColor = UIColor.init(red: 250.0, green: 250.0, blue: 250.0, alpha: 1)
+                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            })
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
+    
   }
   
   func goBack() {
@@ -84,6 +87,32 @@ struct ContentView: View {
   func goForward() {
     webViewStore.webView.goForward()
   }
+    
+  struct Item: Identifiable {
+    var id: Int
+    var name: String
+  }
+    struct NavigationConfigurator: UIViewControllerRepresentable {
+        var configure: (UINavigationController) -> Void = { _ in }
+
+        func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+            UIViewController()
+        }
+        func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+            if let nc = uiViewController.navigationController {
+                self.configure(nc)
+            }
+        }
+
+    }
+    func addTask() {
+        let item = Item(id: items.count+1, name: "Sample Task")
+        items.append(item)
+    }
+
+    func removeTask() {
+        items.removeLast()
+    }
 }
 
 
