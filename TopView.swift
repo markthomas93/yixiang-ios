@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import WebKit
+
 
 struct TopView: View {
     @ObservedObject var viewRouter = ViewRouter()
@@ -18,7 +20,7 @@ struct TopView: View {
                     Image(selection == 1 ? "compass-fill" : "compass")
                     Text("主页").foregroundColor(.black)
                 }.tag(1)
-            Text("Another Tab")
+                Text("")
                 .tabItem {
                     Image(selection == 2 ? "dashboard-fill" : "dashboard")
                     Text("小组")
@@ -54,44 +56,25 @@ struct ContentView_Previews: PreviewProvider {
 
 struct ContentView: View {
   @ObservedObject var webViewStore = WebViewStore()
-  @State var items = [Item]()
   var body: some View {
     ZStack{
         NavigationView {
-            List(items) { item in
-                Text(item.name)
-            }
+            WebPageView()
             .navigationBarTitle(Text("易乡"), displayMode: .inline)
             .navigationBarItems(trailing:
-            HStack {
-                Button(action: {self.addTask()}) {
-                Image("")
-                }
-            Button(action: {self.addTask()}) {
-                Image("")
-                }
+                HStack {
+                    Image(systemName: "magnifyingglass").foregroundColor(.secondary)
+                    
             })
             .background(NavigationConfigurator { nc in
-                nc.navigationBar.barTintColor = UIColor.init(red: 250.0, green: 250.0, blue: 250.0, alpha: 1)
+                nc.navigationBar.barTintColor = .white
                 nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
             })
         }.navigationViewStyle(StackNavigationViewStyle())
     }
     
   }
-  
-  func goBack() {
-    webViewStore.webView.goBack()
-  }
-  
-  func goForward() {
-    webViewStore.webView.goForward()
-  }
     
-  struct Item: Identifiable {
-    var id: Int
-    var name: String
-  }
     struct NavigationConfigurator: UIViewControllerRepresentable {
         var configure: (UINavigationController) -> Void = { _ in }
 
@@ -105,14 +88,14 @@ struct ContentView: View {
         }
 
     }
-    func addTask() {
-        let item = Item(id: items.count+1, name: "Sample Task")
-        items.append(item)
-    }
-
-    func removeTask() {
-        items.removeLast()
-    }
 }
 
-
+struct WebPageView : UIViewRepresentable {
+    func makeUIView(context: Context) -> WKWebView  {
+        return WKWebView()
+    }
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        let req = URLRequest(url: URL(string: "http://18.163.178.37")!)
+        uiView.load(req)
+    }
+}
