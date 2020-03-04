@@ -12,7 +12,7 @@ import WebKit
 
 struct TopView: View {
     @ObservedObject var viewRouter = ViewRouter()
-    @State private var selection = 0;
+    @State private var selection = 1;
     var body: some View {
         TabView(selection: $selection) {
             ContentView()
@@ -95,7 +95,7 @@ struct WebPageView : UIViewRepresentable {
         return WKWebView()
     }
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        let req = URLRequest(url: URL(string: "http://18.163.178.37")!)
+        let req = URLRequest(url: URL(string: "https://yixiang.app")!)
         uiView.load(req)
     }
 }
