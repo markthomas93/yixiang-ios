@@ -25,7 +25,7 @@ struct TopView: View {
                     Image(selection == 2 ? "dashboard-fill" : "dashboard")
                     Text("小组")
                 }.tag(2)
-            Text("The Last Tab")
+            PageDemoView()
                 .tabItem {
                     Image(selection == 3 ? "crown-fill" : "crown")
                     Text("工具")

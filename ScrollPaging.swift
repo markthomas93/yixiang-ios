@@ -1,82 +1,151 @@
+//import SwiftUI
+
+struct PageViewController: UIViewControllerRepresentable {
+    var controllers: [UIViewController]
+    @Binding var currentPage: Int
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeUIViewController(context: Context) -> UIPageViewController {
+        let pageViewController = UIPageViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal)
+        pageViewController.dataSource = context.coordinator
+        pageViewController.delegate = context.coordinator
+
+        return pageViewController
+    }
+
+    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
+        pageViewController.setViewControllers(
+            [controllers[currentPage]], direction: .forward, animated: true)
+    }
+
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+        var parent: PageViewController
+
+        init(_ pageViewController: PageViewController) {
+            self.parent = pageViewController
+        }
+
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            viewControllerBefore viewController: UIViewController) -> UIViewController?
+        {
+            guard let index = parent.controllers.firstIndex(of: viewController) else {
+                return nil
+            }
+            if index == 0 {
+                return nil
+            }
+            return parent.controllers[index - 1]
+        }
+
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            viewControllerAfter viewController: UIViewController) -> UIViewController?
+        {
+            guard let index = parent.controllers.firstIndex(of: viewController) else {
+                return nil
+            }
+            if index + 1 == parent.controllers.count {
+                return nil
+            }
+            return parent.controllers[index + 1]
+        }
+
+        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+            if completed,
+                let visibleViewController = pageViewController.viewControllers?.first,
+                let index = parent.controllers.firstIndex(of: visibleViewController)
+            {
+                parent.currentPage = index
+            }
+        }
+    }
+}
+
+struct PageView<Page: View>: View {
+    var viewControllers: [UIHostingController<Page>]
+    @Binding var currentPage: Int
+
+    init(_ views: [Page], currentPage: Binding<Int>) {
+        self._currentPage = currentPage
+        self.viewControllers = views.map { UIHostingController(rootView: $0) }
+    }
+
+    var body: some View {
+        PageViewController(controllers: viewControllers, currentPage: $currentPage)
+    }
+}
+
+
+
+struct PageDemoView: View {
+    @State private var page = 0
+
+    var body: some View {
+        VStack {
+            Picker("Page", selection: $page) {
+                Text("Page 1").tag(0)
+                Text("Page 2").tag(1)
+                 Text("Page 3").tag(2)
+                 Text("Page 4").tag(3)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+            PageView([
+                ContentView(),
+                ContentView(),
+                ContentView(),
+                ContentView()
+            ], currentPage: $page)
+        }
+    }
+}
+
+struct  PageDemoView_Previews: PreviewProvider {
+    static var previews: some View {
+         AuthView()
+    }
+}
+
 import SwiftUI
 
-struct Page: View, Identifiable {
-    let id = UUID()
+struct AuthView: View {
+
+    @State private var authPath = 0
+
+    /* ... */
 
     var body: some View {
-        VStack(spacing: 0) {
-            ContentView()
-        }
-        .frame(width: 200, height: 300, alignment: .leading)
-        .background(getRandomColor())
-    }
-}
-
-struct SwiftUIPagerView<Content: View & Identifiable>: View {
-
-    @State private var index: Int = 0
-    @State private var offset: CGFloat = 0
-
-    var pages: [Content]
-
-    var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: 0) {
-                    ForEach(self.pages) { page in
-                        page
-                            .frame(width: geometry.size.width, height: nil)
-                    }
-                }
+        VStack {
+            Picker(selection: $authPath, label: Text("Authentication Path")) {
+                Text("Log In").tag(0)
+                Text("Sign Up").tag(1)
             }
-            .content.offset(x: self.offset)
-            .frame(width: geometry.size.width, height: nil, alignment: .leading)
-            .gesture(DragGesture()
-                .onChanged({ value in
-                    self.offset = value.translation.width - geometry.size.width * CGFloat(self.index)
-                })
-                .onEnded({ value in
-                    if abs(value.predictedEndTranslation.width) >= geometry.size.width / 2 {
-                        var nextIndex: Int = (value.predictedEndTranslation.width < 0) ? 1 : -1
-                        nextIndex += self.index
-                        self.index = nextIndex.keepIndexInRange(min: 0, max: self.pages.endIndex - 1)
-                    }
-                    withAnimation { self.offset = -geometry.size.width * CGFloat(self.index) }
-                })
-            )
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+
+            Spacer()
+
+            if authPath == 0 {
+                Text("a")
+                    .animation(.default)
+                    .transition(.move(edge: .leading))
+                    .padding()
+            }
+            if authPath == 1 {
+                Text("a")
+                    .animation(.default)
+                    .transition(.move(edge: .trailing))
+                    .padding()
+            }
+
+            Spacer()
         }
-    }
-}
-
-extension Int {
-    func keepIndexInRange(min: Int, max: Int) -> Int {
-        switch self {
-            case ..<min: return min
-            case max...: return max
-            default: return self
-        }
-    }
-}
-
-func getRandomColor() -> Color {
-    let r = Double.random(in: 0..<1)
-    let g = Double.random(in: 0..<1)
-    let b = Double.random(in: 0..<1)
-    return Color(red: r, green: g, blue: b, opacity: 1.0)
-}
-
-struct SwiftUIPagerViewDemo: View {
-    var body: some View {
-        SwiftUIPagerView(
-            pages: (0..<4).map {
-                index in Page()
-        })
-    }
-}
-
-
-struct SwiftUIPagerViewDemo_Previews: PreviewProvider {
-    static var previews: some View {
-        SwiftUIPagerViewDemo()
+        .background(Color("Color.Background").edgesIgnoringSafeArea(.all))
     }
 }
