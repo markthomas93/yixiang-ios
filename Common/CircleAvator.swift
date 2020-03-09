@@ -21,6 +21,6 @@ struct CircleAvator: View {
 
 struct CircleAvator_Preview: PreviewProvider {
     static var previews: some View {
-        CircleAvator(imgName: "me")
+        CircleAvator(imgName: "test")
     }
 }
