@@ -49,7 +49,7 @@ struct MineView: View {
             }
             .padding(.top, -60)
         }
-        .background(Color(red: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255))
+        .background(Color(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255))
     }
 }
 
