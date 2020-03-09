@@ -28,28 +28,29 @@ struct MineView: View {
             .frame(height: 100)
             .background(Color(red: 221.0 / 255.0, green: 112.0 / 255.0, blue: 110.0 / 255)
             )
-            .padding(.top, -70)
-
+                .padding(.top, -70)
+            
             VStack {
                 HStack(alignment: .center) {
                     HeaderCard(imgName: "me", userName: "Echo")
-                    .padding(.top, 10)
+                        .padding(.top, 10)
                 }
                 .frame(height: 100)
                 .padding(.vertical, 5)
-
-                Group {
-                    SettingCell(imageName: "setting_quanzi", title: "我的圈子")
-                    SettingCell(imageName: "setting_shoucang", title: "我的收藏")
-                    SettingCell(imageName: "setting_feedback", title: "帮助与反馈")
+                ScrollView{
+                    Group {
+                        SettingCell(imageName: "setting_quanzi", title: "我的圈子")
+                        SettingCell(imageName: "setting_shoucang", title: "我的收藏")
+                        SettingCell(imageName: "setting_feedback", title: "帮助与反馈")
+                    }
+                    .background(Color.white)
+                    .padding(.bottom, -7)
+                    Spacer()
                 }
-                .background(Color.white)
-                .padding(.bottom, -7)
-                Spacer()
             }
             .padding(.top, -60)
         }
-        .background(Color(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255))
+        .background(Color(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 245.0 / 255))
     }
 }
 
