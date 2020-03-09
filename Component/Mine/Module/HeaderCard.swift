@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct HeaderCard: View {
+    var imgName: String
+    
     var body: some View {
         HStack(alignment: .center) {
-            CircleAvator(imgName: "meicon")
+            CircleAvator(imgName: imgName)
                 .padding(.horizontal, 18)
             VStack(alignment: .leading) {
                 HStack {
-                    Text("瓦恁")
+                    Text("あ")
                         .font(Font.system(size: 18))
                     Image("righ_arrow")
                         .frame(width: 21, height: 36, alignment: .leading)
@@ -43,6 +45,6 @@ struct HeaderCard: View {
 
 struct HeaderCard_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderCard()
+        HeaderCard(imgName: "me")
     }
 }
