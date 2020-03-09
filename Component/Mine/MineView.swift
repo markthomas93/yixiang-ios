@@ -10,42 +10,46 @@ import SwiftUI
 
 struct MineView: View {
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
-                    NavigationLink(destination: UserView()) {
-                        HStack {
-                            Image("icon")
-                                .resizable()
-                                .renderingMode(.original)
-                                .clipShape(Circle())
-                                .frame(width: 54, height: 54)
-                                .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                            VStack(alignment: .leading) {
-                                Spacer()
-                                Text("Echo")
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 20))
-                                    .bold()
-                                Spacer()
-                                Text("いろはにほへと")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 14))
-                                Spacer()
-                            }
-                            .offset(x: 5)
-                            Spacer()
-                            Image("more")
-                            .renderingMode(.original)
-                        }
-                        .padding()
-                        .frame(height: 72)
-                    }
-                    Spacer()
-                }
+        VStack {
+            VStack {
+                Color(red: 221.0 / 255.0, green: 112.0 / 255.0, blue: 110.0 / 255)
             }
-            .navigationBarTitle(Text("我的"))
+            .frame(height: 50)
+            .edgesIgnoringSafeArea(.top)
+            VStack {
+                HStack {
+                    Spacer()
+                    Image("setting_icon")
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 15)
+                }
+                Spacer()
+            }
+            .frame(height: 100)
+            .background(Color(red: 221.0 / 255.0, green: 112.0 / 255.0, blue: 110.0 / 255)
+            )
+            .padding(.top, -70)
+
+            VStack {
+                HStack(alignment: .center) {
+                    HeaderCard(imgName: "me", userName: "Echo")
+                    .padding(.top, 10)
+                }
+                .frame(height: 100)
+                .padding(.vertical, 5)
+
+                Group {
+                    SettingCell(imageName: "setting_quanzi", title: "我的圈子")
+                    SettingCell(imageName: "setting_shoucang", title: "我的收藏")
+                    SettingCell(imageName: "setting_feedback", title: "帮助与反馈")
+                }
+                .background(Color.white)
+                .padding(.bottom, -7)
+                Spacer()
+            }
+            .padding(.top, -60)
         }
+        .background(Color(red: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255))
     }
 }
 

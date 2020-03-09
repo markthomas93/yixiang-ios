@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HeaderCard: View {
     var imgName: String
+    var userName: String
     
     var body: some View {
         HStack(alignment: .center) {
@@ -17,16 +18,17 @@ struct HeaderCard: View {
                 .padding(.horizontal, 18)
             VStack(alignment: .leading) {
                 HStack {
-                    Text("あ")
+                    Text(userName)
                         .font(Font.system(size: 18))
-                    Image("righ_arrow")
+                    Image("more")
                         .frame(width: 21, height: 36, alignment: .leading)
                         .scaledToFill()
                 }
                 HStack {
-                    Image("touxiang")
-                    Text("99999人关注")
+                    Text("0人关注")
                         .font(Font.system(size: 13))
+                    Text("30颗豆子")
+                    .font(Font.system(size: 13))
                 }
                 .offset(x: 0, y: -8)
             }
@@ -45,6 +47,6 @@ struct HeaderCard: View {
 
 struct HeaderCard_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderCard(imgName: "me")
+        HeaderCard(imgName: "me", userName: "Echo")
     }
 }
