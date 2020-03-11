@@ -10,12 +10,9 @@ import SwiftUI
 
 struct MineIcon: View {
     var body: some View {
-        ZStack{
-            Color(.gray)
-            CircleAvator(imgName: "me")
-                .overlay(
+        CircleAvator(imgName: "me")
+            .overlay(
                 Circle().stroke(Color.white, lineWidth: 1))
-        }
     }
 }
 

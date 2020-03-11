@@ -12,7 +12,7 @@ struct BackgroundImage: View {
     var body: some View {
         GeometryReader { geometry in
             VStack{
-                Color(.darkGray).frame(height: geometry.size.height * 0.382)
+                Color(.systemPink).frame(height: geometry.size.height * 0.382)
                 Spacer()
             }
             .edgesIgnoringSafeArea(.top)

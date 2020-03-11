@@ -10,13 +10,14 @@ import SwiftUI
 
 struct SettingButton: View {
     var body: some View {
-        HStack {
+        HStack{
             Spacer()
             Image(systemName: "gear")
             .resizable()
-            .frame(width: 24, height: 24)
+            .frame(width: 15, height: 15)
+            .foregroundColor(.white)
         }
-        .padding()
+    .frame(height: 40)
     }
 }
 
