@@ -14,14 +14,19 @@ struct MineView: View {
             BackgroundImage()
             VStack {
                 SettingButton()
+                    .padding(.horizontal, 20)
+                    .offset(y:  -5)
                 HStack {
                     MineIcon()
                     Spacer()
                     EditInfo()
-                }.padding()
-                    .frame(height: 65)
+                }
+                .padding()
+                .frame(height: 65)
+                .offset(y: 5)
                 UserName()
                 AboutMe()
+                UserData()
                 Spacer()
             }
         }

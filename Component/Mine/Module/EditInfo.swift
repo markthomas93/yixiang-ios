@@ -12,7 +12,7 @@ struct EditInfo: View {
     var body: some View {
         ZStack{
             Color.black
-                .frame(width: 85, height: 25)
+                .frame(width: 80, height: 25)
                 .cornerRadius(40)
                 .opacity(0.6)
             .overlay(
@@ -21,7 +21,7 @@ struct EditInfo: View {
             )
             Text("编辑资料")
                 .foregroundColor(Color.white)
-                .font(.system(size: 14))
+                .font(.system(size: 13))
         }
     }
 }
