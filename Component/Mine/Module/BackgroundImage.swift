@@ -12,7 +12,15 @@ struct BackgroundImage: View {
     var body: some View {
         GeometryReader { geometry in
             VStack{
-                Color(.systemPink).frame(height: geometry.size.height * 0.382)
+                ZStack {
+                    ImageStore.shared.image(name: "me", size: 80)
+                        .resizable()
+                        .blur(radius: 20)
+                        .clipped()
+                        .frame(width: geometry.size.width, height: geometry.size.width)
+                    Color.black.opacity(0.5)
+                }.frame(width: geometry.size.width, height: geometry.size.height * 0.382)
+                    .clipped()
                 Spacer()
             }
             .edgesIgnoringSafeArea(.top)
