@@ -13,7 +13,7 @@ struct Page: View, Identifiable {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("Page")
+            Text("")
         }
         .frame(width: 414, height: 300, alignment: .leading)
         .background(getRandomColor())
@@ -30,10 +30,24 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Text("\(self.offset)")
+              // Text("\(self.offset)")
+                HStack {
+                    Text("Left")
+                        .foregroundColor(.black)
+                        .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
+                        .font(.system(size: 30, weight: .bold))
+                    Text("Main")
+                    .foregroundColor(.black)
+                    .font(.system(size: 30, weight: .bold))
+                        .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
+                    Text("Right")
+                    .foregroundColor(.black)
+                    .font(.system(size: 30, weight: .bold))
+                    .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
+                }.padding()
                 RoundedRectangle(cornerRadius: 16)
                     .frame(width: 80, height: 10)
-                    .offset(x: (self.offset/10), y: 0)
+                    .offset(x: -(self.offset/5), y: 0).padding()
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .center, spacing: 0) {
                         ForEach(self.pages) { page in
@@ -48,7 +62,7 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
                 .animation(.easeOut)
                 .gesture(DragGesture()
                     .onChanged({ value in
-                        self.offset = value.translation.width - geometry.size.width * CGFloat(self.index)
+                        self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -621, max: 621)
                     })
                     .onEnded({ value in
                         if abs(value.predictedEndTranslation.width) >= geometry.size.width / 100 {
@@ -56,7 +70,7 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
                             nextIndex += self.index
                             self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
                         }
-                        withAnimation { self.offset = -geometry.size.width * CGFloat(self.index) }
+                        withAnimation { self.offset = ( -geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -414, max: 414) }
                     })
                 )
             }
@@ -66,6 +80,16 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
 
 extension Int {
     func keepIndexInRange(min: Int, max: Int) -> Int {
+        switch self {
+            case ..<min: return min
+            case max...: return max
+            default: return self
+        }
+    }
+}
+
+extension CGFloat {
+    func keepIndexInRange(min: CGFloat, max: CGFloat) -> CGFloat {
         switch self {
             case ..<min: return min
             case max...: return max
