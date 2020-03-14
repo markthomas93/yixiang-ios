@@ -16,7 +16,6 @@ struct BackgroundImage: View {
                     ImageStore.shared.image(name: "me", size: 80)
                         .resizable()
                         .blur(radius: 20)
-                        .clipped()
                         .frame(width: geometry.size.width, height: geometry.size.width)
                     Color.black.opacity(0.5)
                 }.frame(width: geometry.size.width, height: geometry.size.height * 0.382)
