@@ -41,9 +41,11 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
                                 .frame(width: geometry.size.width, height: nil)
                         }
                     }
+                    .offset(x: -geometry.size.width)
                 }
                 .content.offset(x: self.offset)
                 .frame(width: geometry.size.width, height: nil, alignment: .leading)
+                .animation(.easeOut)
                 .gesture(DragGesture()
                     .onChanged({ value in
                         self.offset = value.translation.width - geometry.size.width * CGFloat(self.index)
@@ -52,7 +54,7 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
                         if abs(value.predictedEndTranslation.width) >= geometry.size.width / 100 {
                             var nextIndex: Int = (value.predictedEndTranslation.width < 0) ? 1 : -1
                             nextIndex += self.index
-                            self.index = nextIndex.keepIndexInRange(min: 0, max: self.pages.endIndex - 1)
+                            self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
                         }
                         withAnimation { self.offset = -geometry.size.width * CGFloat(self.index) }
                     })
@@ -87,7 +89,6 @@ struct SwiftUIPagerViewDemo: View {
         })
     }
 }
-
 
 struct SwiftUIPagerViewDemo_Previews: PreviewProvider {
     static var previews: some View {
