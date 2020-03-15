@@ -9,20 +9,27 @@
 import SwiftUI
 
 struct SearchBar: View {
+    
     var body: some View {
-        ZStack {
-            Color(red: 240/255, green: 240/255, blue: 240/255)
-                .frame(width: 300 * 0.67)
-                .cornerRadius(5)
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color(red: 159/255, green: 159/255, blue: 159/255))
-                Text("搜索")
-                    .foregroundColor(Color(red: 159/255, green: 159/255, blue: 159/255))
-                
+        GeometryReader { geometry in
+            ZStack {
+                Color(red: 240/255, green: 240/255, blue: 240/255)
+                    .frame(width: geometry.size.width * 0.618)
+                    .cornerRadius(5)
+                NavigationLink(destination: Text("a")){
+                    HStack(alignment: .center) {
+                        Text("              ")
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color(red: 159/255, green: 159/255, blue: 159/255))
+                        Text("搜索")
+                            .foregroundColor(Color(red: 159/255, green: 159/255, blue: 159/255))
+                        Text("              ")
+                    }
+                }
+                .frame(width: geometry.size.width * 0.618, height: 35)
             }
-            }
-        .frame(height: 40)
+            .frame(height: 32)
+        }
     }
 }
 
@@ -38,3 +45,14 @@ struct SearchBar_Previews: PreviewProvider {
         SearchBar().previewDevice("iPhone 11")
     }
 }
+
+//
+//HStack {
+//    Spacer()
+//    Image(systemName: "paperplane")
+//        .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
+//    SearchBar()
+//    Image(systemName: "star")
+//    .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
+//    Spacer()
+//}.frame(height: 44)

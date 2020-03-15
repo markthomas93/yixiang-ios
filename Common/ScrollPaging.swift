@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Page: View, Identifiable {
     let id = UUID()
-
+    
     var body: some View {
         VStack(spacing: 0) {
             Text("")
@@ -21,58 +21,75 @@ struct Page: View, Identifiable {
 }
 
 struct ScrollPaging<Content: View & Identifiable>: View {
-
+    
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
-
+    
     var pages: [Content]
-
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
-              // Text("\(self.offset)")
-                HStack {
-                    Text("Left")
-                        .foregroundColor(.black)
-                        .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
-                        .font(.system(size: 30, weight: .bold))
-                    Text("Main")
-                    .foregroundColor(.black)
-                    .font(.system(size: 30, weight: .bold))
-                        .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
-                    Text("Right")
-                    .foregroundColor(.black)
-                    .font(.system(size: 30, weight: .bold))
-                    .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
-                }.padding()
-                RoundedRectangle(cornerRadius: 16)
-                    .frame(width: 80, height: 10)
-                    .offset(x: -(self.offset/5), y: 0).padding()
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center, spacing: 0) {
-                        ForEach(self.pages) { page in
-                            page
-                                .frame(width: geometry.size.width, height: nil)
+                VStack {
+                    SearchBar()
+                        .frame(height: 46)
+                    ZStack {
+                        HStack {
+                            Spacer()
+                            Text("关注")
+                                .bold()
+                                .foregroundColor(.black)
+                                .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
+                            Spacer()
+                            Text("广场")
+                                .bold()
+                                .foregroundColor(.black)
+                                .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
+                            Spacer()
+                            Text("趋势")
+                                .bold()
+                                .foregroundColor(.black)
+                                .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
+                            Spacer()
                         }
+                        .frame(height: 20)
+                            
+                        .offset(y: 0)
+                        RoundedRectangle(cornerRadius: 16)
+                            .frame(width: 36, height: 3)
+                            .offset(x: -(self.offset.keepIndexInRange(min: -geometry.size.width, max: geometry.size.width)/3.68 + 0.5), y: 16)
+                            .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
                     }
-                    .offset(x: -geometry.size.width)
                 }
-                .content.offset(x: self.offset)
-                .frame(width: geometry.size.width, height: nil, alignment: .leading)
-                .animation(.easeOut)
-                .gesture(DragGesture()
-                    .onChanged({ value in
-                        self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -621, max: 621)
-                    })
-                    .onEnded({ value in
-                        if abs(value.predictedEndTranslation.width) >= geometry.size.width / 100 {
-                            var nextIndex: Int = (value.predictedEndTranslation.width < 0) ? 1 : -1
-                            nextIndex += self.index
-                            self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
+                ZStack {
+                    Color(red: 246/255, green: 246/255, blue:246/255)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .center, spacing: 0) {
+                            ForEach(self.pages) { page in
+                                page
+                                    .frame(width: geometry.size.width, height: nil)
+                            }
                         }
-                        withAnimation { self.offset = ( -geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -414, max: 414) }
+                        .offset(x: -geometry.size.width * CGFloat(self.index + 1))
+                    }
+                    .content.offset(x: self.offset)
+                    .frame(width: geometry.size.width, height: nil, alignment: .leading)
+                    .animation(.easeInOut)
+                    .gesture(DragGesture()
+                    .onChanged({ value in
+                        self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
-                )
+                        .onEnded({ value in
+                            if abs(value.predictedEndTranslation.width) >= geometry.size.width / 50 {
+                                var nextIndex: Int = (value.predictedEndTranslation.width < 0) ? 1 : -1
+                                nextIndex += self.index
+                                self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
+                            }
+                            withAnimation { self.offset = ( -geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -414, max: 414) }
+                        })
+                    )
+                }
+                Spacer()
             }
         }
     }
@@ -81,9 +98,9 @@ struct ScrollPaging<Content: View & Identifiable>: View {
 extension Int {
     func keepIndexInRange(min: Int, max: Int) -> Int {
         switch self {
-            case ..<min: return min
-            case max...: return max
-            default: return self
+        case ..<min: return min
+        case max...: return max
+        default: return self
         }
     }
 }
@@ -91,9 +108,9 @@ extension Int {
 extension CGFloat {
     func keepIndexInRange(min: CGFloat, max: CGFloat) -> CGFloat {
         switch self {
-            case ..<min: return min
-            case max...: return max
-            default: return self
+        case ..<min: return min
+        case max...: return max
+        default: return self
         }
     }
 }
@@ -116,6 +133,6 @@ struct ScrollPagingDemo: View {
 
 struct ScrollPagingDemo_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollPagingDemo().previewDevice("iPhone SE")
+        ScrollPagingDemo().previewDevice("iPhone 11")
     }
 }

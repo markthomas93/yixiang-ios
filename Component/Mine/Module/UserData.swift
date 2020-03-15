@@ -40,7 +40,6 @@ struct UserData: View {
         .foregroundColor(.white)
         .font(.system(size: 13))
         .frame(height: 30)
-        .offset(y: 30)
     }
 }
 

@@ -10,26 +10,30 @@ import SwiftUI
 
 struct MineView: View {
     var body: some View {
+        GeometryReader {geometry in
         ZStack {
             BackgroundImage()
             VStack {
                 SettingButton()
                     .padding(.horizontal, 20)
-                    .offset(y:  -5)
+                    .padding(.top, geometry.size.height >= 734 ? 44 : 24)
+                    .frame(height: geometry.size.height >= 734 ? 84 : 44)
                 HStack {
                     MineIcon()
                     Spacer()
                     EditInfo()
                 }
-                .padding()
-                .frame(height: 65)
-                .offset(y: 5)
+                .padding(.horizontal, 20)
+                .frame(height: 70)
+                
                 UserName()
                 AboutMe()
                 UserData()
+                    .frame(height: geometry.size.height >= 734 ? 105 : 70)
                 Spacer()
             }
-        }
+        }.edgesIgnoringSafeArea(.top)
+    }
     }
 }
 

@@ -16,8 +16,8 @@ struct AboutMe: View {
                 .foregroundColor(.white)
             Spacer()
         }
-        .padding()
-        .frame(height: 30)
+        .padding(.horizontal)
+        .frame(height: 20)
     }
 }
 

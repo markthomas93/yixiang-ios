@@ -11,13 +11,11 @@ import SwiftUI
 struct IndexPagging: View {
     var body: some View {
         VStack {
-            
             ScrollPaging(pages: [
                    TestView(),
                    TestView(),
                    TestView()
                    ])
-                   .navigationBarTitle("主页")
             Spacer()
         }
     }
@@ -31,7 +29,7 @@ struct TestView: View, Identifiable {
             VStack(spacing: 0) {
                 Text("")
             }
-            .frame(width: geometry.size.width, height: 600, alignment: .leading)
+            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
             .background(getRandomColor())
         }
     }
