@@ -15,12 +15,12 @@ struct Page: View, Identifiable {
         VStack(spacing: 0) {
             Text("")
         }
-        .frame(width: 414, height: 300, alignment: .leading)
+        .frame(width: 404, height: 300, alignment: .leading)
         .background(getRandomColor())
     }
 }
 
-struct SwiftUIPagerView<Content: View & Identifiable>: View {
+struct ScrollPaging<Content: View & Identifiable>: View {
 
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
@@ -105,41 +105,17 @@ func getRandomColor() -> Color {
     return Color(red: r, green: g, blue: b, opacity: 1.0)
 }
 
-struct SwiftUIPagerViewDemo: View {
+struct ScrollPagingDemo: View {
     var body: some View {
-        SwiftUIPagerView(
+        ScrollPaging(
             pages: (0..<3).map {
                 index in Page()
         })
     }
 }
 
-struct SwiftUIPagerViewDemo_Previews: PreviewProvider {
+struct ScrollPagingDemo_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIPagerViewDemo().previewDevice("iPhone 11")
+        ScrollPagingDemo().previewDevice("iPhone SE")
     }
 }
-
-
-struct View1: View {
-    var body: some View {
-        Color.gray
-        .frame(width: 300, height: 500)
-    }
-}
-
-
-struct View2: View {
-    var body: some View {
-        Color.primary
-        .frame(width: 300, height: 500)
-    }
-}
-
-struct View3: View {
-    var body: some View {
-        Color.secondary
-    }
-}
-
-
