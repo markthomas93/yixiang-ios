@@ -70,7 +70,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                     .frame(width: geometry.size.width, height: nil)
                             }
                         }
-                        .offset(x: -geometry.size.width * CGFloat(self.index + 1))
+                        .offset(x: -geometry.size.width)
                     }
                     .content.offset(x: self.offset)
                     .frame(width: geometry.size.width, height: nil, alignment: .leading)
