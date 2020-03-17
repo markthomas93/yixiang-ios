@@ -20,64 +20,70 @@ struct Page: View, Identifiable {
     }
 }
 
+struct Word: View, Identifiable {
+    let id = UUID()
+    var word: String
+    
+    var body: some View {
+        Text(self.word)
+    }
+}
+
 struct ScrollPaging<Content: View & Identifiable>: View {
     
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
-    
+    var searchBarShow: Bool = true
     var pages: [Content]
+    var words: [Page]
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                VStack {
-                    SearchBar()
-                        .frame(height: 46)
-                    ZStack {
-                        HStack {
-                            Spacer()
-                            Text("关注")
-                                .bold()
-                                .foregroundColor(.black)
-                                .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
-                                .gesture(TapGesture()
-                                    .onEnded({
-                                        self.index = -1
-                                        self.offset = geometry.size.width
-                                    })
-                            )
-                            Spacer()
-                            Text("广场")
-                                .bold()
-                                .foregroundColor(.black)
-                                .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
-                                .gesture(TapGesture()
-                                    .onEnded({
-                                        self.index = 0
-                                        self.offset = 0
-                                    })
-                            )
-                            Spacer()
-                            Text("趋势")
-                                .bold()
-                                .foregroundColor(.black)
-                                .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
-                                .gesture(TapGesture()
-                                    .onEnded({
-                                        self.index = 1
-                                        self.offset = -geometry.size.width
-                                    })
-                            )
-                            Spacer()
-                        }
-                        .frame(height: 20)
-                        .offset(y: 0)
-                        RoundedRectangle(cornerRadius: 16)
-                            .frame(width: 36, height: 3)
-                            .offset(x: -(self.offset.keepIndexInRange(min: -geometry.size.width, max: geometry.size.width)/3.68 + 0.5), y: 16)
-                            .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
-                            .animation(.spring())
+                ZStack {
+                    HStack {
+                        Spacer()
+                        Text("关注")
+                            .bold()
+                            .foregroundColor(.black)
+                            .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
+                            .gesture(TapGesture()
+                                .onEnded({
+                                    self.index = -1
+                                    self.offset = geometry.size.width
+                                })
+                        )
+                        Spacer()
+                        Text("广场")
+                            .bold()
+                            .foregroundColor(.black)
+                            .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
+                            .gesture(TapGesture()
+                                .onEnded({
+                                    self.index = 0
+                                    self.offset = 0
+                                })
+                        )
+                        Spacer()
+                        Text("趋势")
+                            .bold()
+                            .foregroundColor(.black)
+                            .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
+                            .gesture(TapGesture()
+                                .onEnded({
+                                    self.index = 1
+                                    self.offset = -geometry.size.width
+                                })
+                        )
+                        Spacer()
                     }
+                    .frame(height: 20)
+                    .offset(y: 0)
+                    RoundedRectangle(cornerRadius: 16)
+                        .frame(width: 36, height: 3)
+                        .offset(x: -(self.offset.keepIndexInRange(min: -geometry.size.width, max: geometry.size.width)/3.68 + 0.5), y: 16)
+                        .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
+                        .animation(.spring())
                 }
                 ZStack {
                     Color(red: 246/255, green: 246/255, blue:246/255)

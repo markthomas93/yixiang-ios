@@ -12,9 +12,8 @@ struct AboutMe: View {
     var body: some View {
         HStack {
             Text("いろはにほへと")
-                .font(.subheadline)
+                .font(.system(size: 15))
                 .foregroundColor(.white)
-            Spacer()
         }
         .padding(.horizontal)
         .frame(height: 20)

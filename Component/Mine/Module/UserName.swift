@@ -12,10 +12,9 @@ struct UserName: View {
     var body: some View {
         HStack {
             Text("主人好好吃啊")
-                .font(.system(size: 18, weight: .bold))
+                .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.white)
             Condition()
-            Spacer()
         }.padding()
             .frame(height: 30)
     }

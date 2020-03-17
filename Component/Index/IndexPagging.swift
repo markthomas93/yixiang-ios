@@ -11,6 +11,8 @@ import SwiftUI
 struct IndexPagging: View {
     var body: some View {
         VStack {
+            SearchBar()
+            .frame(height: 40)
             ScrollPaging(pages: [
                    TestView(),
                    TestView(),

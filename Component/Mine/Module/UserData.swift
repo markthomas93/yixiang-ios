@@ -12,34 +12,34 @@ struct UserData: View {
     var body: some View {
         HStack {
             VStack(alignment: .center) {
-                Text("0")
-                    .font(.system(size: 17, weight: .bold))
-                Spacer()
-                Text("获赞")
-            }
+                Text("10")
+                    .font(.system(size: 15, weight: .bold))
+                Text("获赞").offset(y: 5)
+                .font(.system(size: 13))
+            }.frame(width: 70, height: 40)
             Spacer()
             VStack(alignment: .center) {
-                Text("0").font(.system(size: 17, weight: .bold))
-                Spacer()
-                Text("关注")
-            }
+                Text("9").font(.system(size: 15, weight: .bold))
+                Text("关注").offset(y: 5)
+                .font(.system(size: 13))
+            }.frame(width: 70, height: 40)
             Spacer()
             VStack(alignment: .center) {
-                Text("0").font(.system(size: 17, weight: .bold))
-                Spacer()
-                Text("知音")
-            }
+                Text("0").font(.system(size: 15, weight: .bold))
+                Text("知音").offset(y: 5)
+                .font(.system(size: 13))
+            }.frame(width: 70, height: 40)
             Spacer()
             VStack(alignment: .center) {
-                Text("0").font(.system(size: 17, weight: .bold))
-                Spacer()
-                Text("知识")
-            }
+                Text("32").font(.system(size: 15, weight: .bold))
+                Text("知识").offset(y: 5)
+
+                .font(.system(size: 13))
+            }.frame(width: 70, height: 40)
         }
-        .padding(.horizontal, 40)
+        .padding()
         .foregroundColor(.white)
-        .font(.system(size: 13))
-        .frame(height: 30)
+        .frame(height: 70)
     }
 }
 

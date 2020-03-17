@@ -18,11 +18,12 @@ struct BackgroundImage: View {
                         .blur(radius: 20)
                         .frame(width: geometry.size.width, height: geometry.size.width)
                     Color.black.opacity(0.5)
-                }.frame(width: geometry.size.width, height: geometry.size.height * 0.382 + (geometry.size.height >= 734 ? 44 : 34))
-                .clipped()
-                Spacer()
+                }
+                
             }
             .edgesIgnoringSafeArea(.top)
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .clipped()
         }
     }
 }

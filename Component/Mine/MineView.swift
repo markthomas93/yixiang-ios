@@ -10,30 +10,42 @@ import SwiftUI
 
 struct MineView: View {
     var body: some View {
-        GeometryReader {geometry in
-        ZStack {
-            BackgroundImage()
-            VStack {
-                SettingButton()
-                    .padding(.horizontal, 20)
-                    .padding(.top, geometry.size.height >= 734 ? 44 : 24)
-                    .frame(height: geometry.size.height >= 734 ? 84 : 44)
-                HStack {
-                    MineIcon()
-                    Spacer()
-                    EditInfo()
-                }
-                .padding(.horizontal, 20)
-                .frame(height: 70)
+        
+        GeometryReader { geometry in
+            VStack{
+                ZStack(alignment: .bottom) {
+                    BackgroundImage()
+                    VStack {
+                        HStack {
+                            Spacer()
+                            SettingButton().padding(.horizontal, 20)
+                        }
+                        HStack {
+                            MineIcon()
+                            Spacer()
+                            EditInfo()
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        HStack {
+                            UserName()
+                            Spacer()
+                        }
+                        HStack {
+                            AboutMe()
+                            Spacer()
+                        }
+                        UserData()
+                    }
+                }.frame(height: geometry.size.height * 0.38 + CGFloat(20))
                 
-                UserName()
-                AboutMe()
-                UserData()
-                    .frame(height: geometry.size.height >= 734 ? 105 : 70)
-                Spacer()
-            }
-        }.edgesIgnoringSafeArea(.top)
-    }
+                ScrollPaging(pages: [
+                TestView(),
+                TestView(),
+                TestView()
+                ]).frame(height: geometry.size.height * 0.62 - CGFloat(20))
+            }.edgesIgnoringSafeArea(.top)
+        }
     }
 }
 
