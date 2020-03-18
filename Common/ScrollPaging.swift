@@ -20,13 +20,8 @@ struct Page: View, Identifiable {
     }
 }
 
-struct Word: View, Identifiable {
-    let id = UUID()
-    var word: String
-    
-    var body: some View {
-        Text(self.word)
-    }
+struct Word {
+    var name: String
 }
 
 struct ScrollPaging<Content: View & Identifiable>: View {
@@ -35,7 +30,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     @State private var offset: CGFloat = 0
     var searchBarShow: Bool = true
     var pages: [Content]
-    var words: [Page]
+    var words: [Word]
     
     var body: some View {
         GeometryReader { geometry in
@@ -43,7 +38,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                 ZStack {
                     HStack {
                         Spacer()
-                        Text("关注")
+                        Text(self.words[0].name)
                             .bold()
                             .foregroundColor(.black)
                             .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
@@ -54,7 +49,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                 })
                         )
                         Spacer()
-                        Text("广场")
+                        Text(self.words[1].name)
                             .bold()
                             .foregroundColor(.black)
                             .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
@@ -65,7 +60,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                 })
                         )
                         Spacer()
-                        Text("趋势")
+                        Text(self.words[2].name)
                             .bold()
                             .foregroundColor(.black)
                             .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
@@ -151,7 +146,9 @@ struct ScrollPagingDemo: View {
         ScrollPaging(
             pages: (0..<3).map {
                 index in Page()
-        })
+        }, 
+                     words: [Word(name: "关注"),Word(name: "广场"),Word(name: "趋势")
+        ])
     }
 }
 

@@ -43,6 +43,8 @@ struct MineView: View {
                 TestView(),
                 TestView(),
                 TestView()
+                ],
+                             words: [Word(name: "回复"),Word(name: "工具"),Word(name: "收藏")
                 ]).frame(height: geometry.size.height * 0.62 - CGFloat(20))
             }.edgesIgnoringSafeArea(.top)
         }
