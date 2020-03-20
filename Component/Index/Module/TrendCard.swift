@@ -28,14 +28,14 @@ struct TrendCard: View {
                         //Text(String(4))
                         Text(String(data.index))
                             .bold()
-                            .font(.system(size: 20))
+                            .font(.system(size: 16))
                             .padding(.vertical, 5)
                             .padding(.leading, 15)
                             .foregroundColor(Color.gray)
                         VStack(alignment: .leading) {
                             //Text("如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？")
                             Text(data.title)
-                                .font(.system(size: 20, weight: .bold))
+                                .font(.system(size: 15, weight: .bold))
                                 .lineSpacing(3)
                                 .padding(.vertical, 5)
                             
@@ -49,7 +49,7 @@ struct TrendCard: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 110, height: 80)
                             .cornerRadius(5)
-                            .padding(.vertical, 6)
+                            .padding(.vertical, 5)
                             .padding(.trailing, 15)
                     }
                     .background(Color.white)
