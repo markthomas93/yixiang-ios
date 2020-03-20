@@ -93,13 +93,13 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     }
                     .content.offset(x: self.offset)
                     .frame(width: geometry.size.width, height: nil, alignment: .leading)
-                    .animation(.easeInOut)
+                    .animation(.easeInOut(duration: 0.3))
                     .gesture(DragGesture()
                     .onChanged({ value in
                         self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
-                            if abs(value.predictedEndTranslation.width) >= geometry.size.width / 50 {
+                            if abs(value.predictedEndTranslation.width) >= geometry.size.width / 2 {
                                 var nextIndex: Int = (value.predictedEndTranslation.width < 0) ? 1 : -1
                                 nextIndex += self.index
                                 self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
