@@ -93,7 +93,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     }
                     .content.offset(x: self.offset)
                     .frame(width: geometry.size.width, height: nil, alignment: .leading)
-                    .animation(.easeInOut(duration: 0.3))
+                    .animation(.easeOut(duration: 0.3))
                     .gesture(DragGesture()
                     .onChanged({ value in
                         self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
