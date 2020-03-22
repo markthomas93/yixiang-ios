@@ -38,6 +38,8 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
+                Text("\(self.offset)")
+                Text(String(self.index))
                 ZStack {
                     HStack {
                         Spacer()

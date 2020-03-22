@@ -64,7 +64,7 @@ struct TrendCard: View, Identifiable {
                         .background(Color.white)
                     }
                 }
-            }
+            }.padding(.top, 10)
         }
     }
 }
