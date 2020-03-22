@@ -11,9 +11,10 @@ import SwiftUI
 
 struct CircleAvator: View {
     var imgName: String
+    var size: Int
     var body: some View {
         VStack {
-            ImageStore.shared.image(name: imgName, size: 60)
+            ImageStore.shared.image(name: imgName, size: self.size)
                 .clipShape(Circle())
         }
     }
@@ -21,6 +22,6 @@ struct CircleAvator: View {
 
 struct CircleAvator_Preview: PreviewProvider {
     static var previews: some View {
-        CircleAvator(imgName: "me")
+        CircleAvator(imgName: "me", size: 60)
     }
 }

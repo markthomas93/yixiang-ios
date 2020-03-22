@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MineIcon: View {
     var body: some View {
-        CircleAvator(imgName: "me")
+        CircleAvator(imgName: "me", size: 60)
             .overlay(
                 Circle().stroke(Color.white, lineWidth: 1))
     }

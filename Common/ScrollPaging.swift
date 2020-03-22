@@ -32,7 +32,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     var pages: [Content]
     var words: [Word]
     var leftView = Page()
-    var midView = Page()
+    var midView = PostCard()
     var rightView = TrendView()
     
     var body: some View {
@@ -92,10 +92,9 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                             self.leftView
                                     .frame(width: geometry.size.width, height: nil)
                             self.midView
-                            .frame(width: geometry.size.width, height: nil)
+                            .frame(width: geometry.size.width)
                             self.rightView
                             .frame(width: geometry.size.width, height: nil)
-                            
                         }
                         .offset(x: -geometry.size.width)
                     }
@@ -112,6 +111,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                 nextIndex += self.index
                                 self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
                             }
+                            
                             withAnimation { self.offset = ( -geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -414, max: 414) }
                         })
                     )
