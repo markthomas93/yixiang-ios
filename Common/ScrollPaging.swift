@@ -33,7 +33,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     var words: [Word]
     var leftView = Page()
     var midView = PostCard()
-    var rightView = TrendView()
+    var rightView = MainView()
     
     var body: some View {
         GeometryReader { geometry in

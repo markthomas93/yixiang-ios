@@ -6,14 +6,30 @@
 //  Copyright © 2020 Ai. All rights reserved.
 //
 
-//import SwiftUI
-//
-//struct MainView: View {
-//   Text("")
-//}
-//
-//struct MainView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainView()
-//    }
-//}
+import SwiftUI
+
+struct MainView: View {
+    var body: some View {
+            VStack {
+                List {
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                    PostCard()
+                }
+            }
+        
+    }
+    
+}
+
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+    }
+}

@@ -19,7 +19,7 @@ struct TrendCard: View, Identifiable {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                ScrollView(showsIndicators: false) {
+                ScrollView(.vertical, showsIndicators: false) {
                     ForEach(1..<self.index) { item in
                         HStack(alignment: .top, spacing: 0) {
                             //Text(String(4))
