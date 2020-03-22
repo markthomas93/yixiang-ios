@@ -8,52 +8,61 @@
 
 import SwiftUI
 
-struct TrendCardData: Identifiable {
+struct TrendCard: View, Identifiable {
     var id = UUID()
     
     var index: Int
     var title: String
     var image: String
     var watch: String
-}
-
-struct TrendCard: View {
-    let data: [TrendCardData]
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                ForEach(self.data) { data in
-                    HStack(alignment: .top, spacing: 20) {
-                        //Text(String(4))
-                        Text(String(data.index))
-                            .bold()
-                            .font(.system(size: 16))
-                            .padding(.vertical, 5)
-                            .padding(.leading, 15)
-                            .foregroundColor(Color.gray)
-                        VStack(alignment: .leading) {
-                            //Text("如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？")
-                            Text(data.title)
-                                .font(.system(size: 15, weight: .bold))
-                                .lineSpacing(3)
-                                .padding(.vertical, 5)
+                ScrollView(showsIndicators: false) {
+                    ForEach(1..<self.index) { item in
+                        HStack(alignment: .top, spacing: 0) {
+                            //Text(String(4))
+                            HStack(alignment: .center) {
+                                Text(String(item))
+                                    .bold()
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color.gray)
+                                    .padding(.vertical, 8)
+                            }.frame(width: geometry.size.width * 0.12)
+                                .background(Color.white)
                             
-                            Text(data.watch + "热度")
-                                .font(.footnote)
-                                .padding(.vertical, 5)
-                                .foregroundColor(Color.gray)
+                            HStack(alignment: .center) {
+                                VStack(alignment: .leading) {
+                                    
+                                    Text(self.title)
+                                        .font(.system(size: 15, weight: .bold))
+                                        .lineSpacing(3)
+                                        .padding(.top, 5)
+                                        .frame(height: self.title.count > 14 ? 50 : 20)
+                                
+                                    Text(self.watch + "热度")
+                                        .font(.footnote)
+                                        .foregroundColor(Color.gray)
+                                    .padding(.top, 5)
+                                    Spacer()
+                                }
+                                .frame(height: 70)
+                                Spacer()
+                            }
+                            .frame(width: geometry.size.width * 0.56, height: 80)
+                            .background(Color.white)
+                            HStack(alignment: .top) {
+                                Image(self.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: geometry.size.width * 0.326 - 40, height: 65)
+                                    .cornerRadius(5)
+                            }.frame(width: geometry.size.width * 0.326, height: 80)
                         }
-                        Image(data.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 110, height: 80)
-                            .cornerRadius(5)
-                            .padding(.vertical, 5)
-                            .padding(.trailing, 15)
+                        .frame(width: geometry.size.width, height: 80)
+                        .background(Color.white)
                     }
-                    .background(Color.white)
-                    .frame(width: geometry.size.width)
                 }
             }
         }
@@ -62,7 +71,7 @@ struct TrendCard: View {
 
 struct TrendCard_Previews: PreviewProvider {
     static var previews: some View {
-        TrendCard(data: [TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122")]).previewDevice("iPhone 11")
+        TrendCard(index: 2, title: "一二三四五六七八九十一二三四", image: "ai", watch: "122").previewDevice("iPhone 11")
         
     }
 }

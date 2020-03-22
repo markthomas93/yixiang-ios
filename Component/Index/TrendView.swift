@@ -12,15 +12,8 @@ struct TrendView: View, Identifiable {
     let id = UUID()
     
     var body: some View {
-        ScrollView {
-        TrendCard(data: [TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122"),
-        TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122"),
-        TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122"),
-        TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122"),
-        TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122"),
-        TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122"),
-        TrendCardData(index: 1, title: "如何看待马云向美国捐赠 50 万份测试剂盒和 100 万只口罩的行为？", image: "ai", watch: "122")])
-    }
+        TrendCard(index: 12, title: "一二三四五六七八九十八九十按时到手的厚爱", image: "ai", watch: "122")
+    
     }
 }
 
