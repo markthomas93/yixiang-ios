@@ -13,7 +13,6 @@ struct TrendView: View, Identifiable {
     
     var body: some View {
         TrendCard(index: 12, title: "一二三四五六七八九十八九十按时到手的厚爱", image: "ai", watch: "122")
-    
     }
 }
 

@@ -31,6 +31,9 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     var searchBarShow: Bool = true
     var pages: [Content]
     var words: [Word]
+    var leftView = Page()
+    var midView = Page()
+    var rightView = TrendView()
     
     var body: some View {
         GeometryReader { geometry in
@@ -84,10 +87,13 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     Color(red: 246/255, green: 246/255, blue:246/255)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 0) {
-                            ForEach(self.pages) { page in
-                                page
+                            self.leftView
                                     .frame(width: geometry.size.width, height: nil)
-                            }
+                            self.midView
+                            .frame(width: geometry.size.width, height: nil)
+                            self.rightView
+                            .frame(width: geometry.size.width, height: nil)
+                            
                         }
                         .offset(x: -geometry.size.width)
                     }
