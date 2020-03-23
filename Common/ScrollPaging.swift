@@ -115,7 +115,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                         let width: CGFloat = value.translation.width
                         self.oldOffset = self.offset
                         // 移动x,y都在50以内 并且角度在15以上80以下的手势无视
-                        self.offset = (abs(height) <= 50  && abs(width) <= 50 && abs(width) >= 5) && (atan(height/width) * 57.3 <= 85 && atan(abs(height/width)) * 57.3 >= 15) ? self.offset : (width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
+                        self.offset = (abs(height) <= 50  && abs(width) <= 50) && (atan(height/width) * 57.3 <= 85 && atan(abs(height/width)) * 57.3 >= 15) ? self.offset : (width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
                             if abs(value.predictedEndTranslation.width) >= geometry.size.width / 2 {
