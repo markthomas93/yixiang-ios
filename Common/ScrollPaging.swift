@@ -28,6 +28,10 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
+    @State private var oldOffset: CGFloat = 0
+    
+    @State private var oldOffset3: CGFloat = 0
+    @State private var oldOffset4: CGFloat = 0
     var searchBarShow: Bool = true
     var pages: [Content]
     var words: [Word]
@@ -40,6 +44,8 @@ struct ScrollPaging<Content: View & Identifiable>: View {
             VStack {
                 Text("\(self.offset)")
                 Text(String(self.index))
+                Text("\(self.oldOffset3)")
+                Text("\(self.oldOffset4)")
                 ZStack {
                     HStack {
                         Spacer()
@@ -104,7 +110,10 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     .animation(.easeOut(duration: 0.3))
                     .highPriorityGesture(DragGesture()
                     .onChanged({ value in
-                        self.offset = abs(value.translation.height) > 5 ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
+                        self.oldOffset3 = value.translation.height
+                        self.oldOffset4 = value.translation.width
+                        self.oldOffset = self.offset
+                        self.offset = (abs(value.translation.height) <= 50  && abs(value.translation.width) <= 50) && (atan(value.translation.height/value.translation.width) * 57.3 <= 70 && atan(abs(value.translation.height/value.translation.width)) * 57.3 >= 30) ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
                             if abs(value.predictedEndTranslation.width) >= geometry.size.width / 2 {
