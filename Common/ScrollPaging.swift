@@ -87,7 +87,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                 }
                 ZStack {
                     Color(red: 246/255, green: 246/255, blue:246/255)
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
                         HStack(alignment: .center, spacing: 0) {
                             self.leftView
                                     .frame(width: geometry.size.width, height: nil)
@@ -95,15 +95,16 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                             .frame(width: geometry.size.width)
                             self.rightView
                             .frame(width: geometry.size.width, height: nil)
+                            
                         }
                         .offset(x: -geometry.size.width)
                     }
-                    .content.offset(x: self.offset)
+                    .offset(x: self.offset)
                     .frame(width: geometry.size.width, height: nil, alignment: .leading)
                     .animation(.easeOut(duration: 0.3))
-                    .gesture(DragGesture()
+                    .highPriorityGesture(DragGesture()
                     .onChanged({ value in
-                        self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
+                        self.offset = abs(value.translation.height) > 5 ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
                             if abs(value.predictedEndTranslation.width) >= geometry.size.width / 2 {
@@ -112,7 +113,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                 self.index = nextIndex.keepIndexInRange(min: -1, max: self.pages.endIndex - 2)
                             }
                             
-                            withAnimation { self.offset = ( -geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -414, max: 414) }
+                            withAnimation { self.offset = ( -414 * CGFloat(self.index)).keepIndexInRange(min: -414, max: 414) }
                         })
                     )
                 }
