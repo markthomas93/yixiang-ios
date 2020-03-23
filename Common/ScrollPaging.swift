@@ -29,7 +29,6 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
     @State private var oldOffset: CGFloat = 0
-    
     @State private var oldOffset3: CGFloat = 0
     @State private var oldOffset4: CGFloat = 0
     var searchBarShow: Bool = true
@@ -112,8 +111,10 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     .onChanged({ value in
                         self.oldOffset3 = value.translation.height
                         self.oldOffset4 = value.translation.width
+                        let height: CGFloat = value.translation.height
+                        let width: CGFloat = value.translation.width
                         self.oldOffset = self.offset
-                        self.offset = (abs(value.translation.height) <= 50  && abs(value.translation.width) <= 50) && (atan(value.translation.height/value.translation.width) * 57.3 <= 70 && atan(abs(value.translation.height/value.translation.width)) * 57.3 >= 30) ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
+                        self.offset = (abs(height) <= 50  && abs(width) <= 50 && abs(width) >= 5) && (atan(height/width) * 57.3 <= 85 && atan(abs(height/width)) * 57.3 >= 15) ? self.offset : (width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
                             if abs(value.predictedEndTranslation.width) >= geometry.size.width / 2 {
