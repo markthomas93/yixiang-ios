@@ -29,8 +29,6 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
     @State private var oldOffset: CGFloat = 0
-    @State private var oldOffset3: CGFloat = 0
-    @State private var oldOffset4: CGFloat = 0
     var searchBarShow: Bool = true
     var pages: [Content]
     var words: [Word]
@@ -41,10 +39,6 @@ struct ScrollPaging<Content: View & Identifiable>: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Text("\(self.offset)")
-                Text(String(self.index))
-                Text("\(self.oldOffset3)")
-                Text("\(self.oldOffset4)")
                 ZStack {
                     HStack {
                         Spacer()
@@ -109,8 +103,6 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     .animation(.easeOut(duration: 0.3))
                     .highPriorityGesture(DragGesture()
                     .onChanged({ value in
-                        self.oldOffset3 = value.translation.height
-                        self.oldOffset4 = value.translation.width
                         let height: CGFloat = value.translation.height
                         let width: CGFloat = value.translation.width
                         self.oldOffset = self.offset
