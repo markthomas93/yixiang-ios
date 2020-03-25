@@ -9,18 +9,24 @@
 import SwiftUI
 
 struct IndexPagging: View {
+    @State private var isActive = false
+    
     var body: some View {
-        VStack {
-            SearchBar()
-            .frame(height: 40)
-            ScrollPaging(pages: [
-                   TrendView(),
-                   TrendView(),
-                   TrendView()
-                ],
-                         words: [Word(name: "关注"),Word(name: "广场"),Word(name: "趋势")
-            ])
-            Spacer()
+        NavigationStackView(transitionType: .custom(.opacity), easing: .spring()) {
+            VStack {
+                PushView(destination: SearchView()){
+                    SearchBar()
+                }
+                .frame(height: 40)
+                ScrollPaging(pages: [
+                       TrendView(),
+                       TrendView(),
+                       TrendView()
+                    ],
+                             words: [Word(name: "关注"),Word(name: "广场"),Word(name: "趋势")
+                ])
+                Spacer()
+            }
         }
     }
 }
