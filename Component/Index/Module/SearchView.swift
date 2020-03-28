@@ -17,7 +17,7 @@ struct SearchView: View {
                 HStack {
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal, 20)
                         TextField("搜索易乡内容", text: self.$name)
                             .textFieldStyle(PlainTextFieldStyle())
                         Spacer()
