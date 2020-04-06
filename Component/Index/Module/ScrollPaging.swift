@@ -20,18 +20,18 @@ struct Page: View, Identifiable {
     }
 }
 
-struct Word {
-    var name: String
-}
-
-struct ScrollPaging<Content: View & Identifiable>: View {
+struct ScrollPaging: View {
     
     @State private var index: Int = 0
     @State private var offset: CGFloat = 0
     @State private var oldOffset: CGFloat = 0
     var searchBarShow: Bool = true
-    var pages: [Content]
-    var words: [Word]
+    var pages = [
+        TrendView(),
+        TrendView(),
+        TrendView()
+    ]
+    var titles: [String]
     var leftView = Page()
     var midView = MainView()
     var rightView = TrendView()
@@ -42,7 +42,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                 ZStack {
                     HStack {
                         Spacer()
-                        Text(self.words[0].name)
+                        Text(self.titles[0])
                             .bold()
                             .foregroundColor(.black)
                             .opacity(Double(self.offset/414 >= 0.5 ? abs(self.offset)/414 : 0.5))
@@ -53,7 +53,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                 })
                         )
                         Spacer()
-                        Text(self.words[1].name)
+                        Text(self.titles[1])
                             .bold()
                             .foregroundColor(.black)
                             .opacity(Double(abs(self.offset)/414 == 0 ? 1 : ((414 - abs(self.offset)) / 414) <= 0.5 ? 0.5 : (414 - abs(self.offset)) / 414))
@@ -64,7 +64,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                                 })
                         )
                         Spacer()
-                        Text(self.words[2].name)
+                        Text(self.titles[2])
                             .bold()
                             .foregroundColor(.black)
                             .opacity(Double(self.offset/414 <= -0.5 ? abs(self.offset)/414 : 0.5))
@@ -89,11 +89,11 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     HStack {
                         HStack(alignment: .center, spacing: 0) {
                             self.leftView
-                                    .frame(width: geometry.size.width, height: nil)
+                                .frame(width: geometry.size.width, height: nil)
                             self.midView
-                            .frame(width: geometry.size.width)
+                                .frame(width: geometry.size.width)
                             self.rightView
-                            .frame(width: geometry.size.width, height: nil)
+                                .frame(width: geometry.size.width, height: nil)
                             
                         }
                         .offset(x: -geometry.size.width)
@@ -155,12 +155,7 @@ func getRandomColor() -> Color {
 
 struct ScrollPagingDemo: View {
     var body: some View {
-        ScrollPaging(
-            pages: (0..<3).map {
-                index in Page()
-        }, 
-                     words: [Word(name: "关注"),Word(name: "广场"),Word(name: "趋势")
-        ])
+        ScrollPaging(titles: ["关注", "广场", "趋势"])
     }
 }
 

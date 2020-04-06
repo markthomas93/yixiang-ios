@@ -18,13 +18,7 @@ struct IndexPagging: View {
                     SearchBar()
                 }
                 .frame(height: 40)
-                ScrollPaging(pages: [
-                       TrendView(),
-                       TrendView(),
-                       TrendView()
-                    ],
-                             words: [Word(name: "关注"),Word(name: "广场"),Word(name: "趋势")
-                ])
+                ScrollPaging(titles: ["关注", "广场", "趋势"])
                 Spacer()
             }
         }
