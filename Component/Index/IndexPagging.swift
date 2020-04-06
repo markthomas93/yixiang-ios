@@ -17,7 +17,7 @@ struct IndexPagging: View {
                 PushView(destination: SearchView()){
                     SearchBar()
                 }
-                .frame(height: 45)
+                .frame(height: 40)
                 ScrollPaging(pages: [
                        TrendView(),
                        TrendView(),
