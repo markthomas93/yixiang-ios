@@ -32,7 +32,7 @@ struct ScrollPaging: View {
         TrendView()
     ]
     var titles: [String]
-    var leftView = Page()
+    var leftView = StoryCardView()
     var midView = MainView()
     var rightView = TrendView()
     
