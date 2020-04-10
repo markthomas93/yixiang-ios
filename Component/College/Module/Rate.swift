@@ -15,13 +15,20 @@ struct Rate: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .center) {
+                Text("\(atof(input) * rate)")
+                    .font(.system(size: 50))
+            }
+            .frame(width: 500, height: 300)
+            .background(Color.blue)
+            .edgesIgnoringSafeArea(.top)
+            HStack(alignment: .center) {
                 TextField("1", text: $input)
                 .keyboardType(.numberPad)
-            }
-            HStack {
-                Text("".appendingFormat("%.2f", "\(atof(input) * rate)"))
-            }
+                .frame(width: 100, height: 300)
+                .font(.system(size: 30))
+            }.background(Color.red)
+            Spacer()
         }
     }
 }

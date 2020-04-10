@@ -13,7 +13,7 @@ struct RootView: View {
     @State private var selection = 0
     let homeView = IndexPagging()
     let contactView = Text("a")
-    let discoverView = Text("b")
+    let discoverView = Rate()
     let meView = MineView()
     var body: some View {
         
