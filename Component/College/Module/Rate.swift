@@ -19,6 +19,7 @@ struct Rate: View {
     
     var body: some View {
         VStack {
+            VStack {
             HStack(alignment: .center) {
                 Text(calcResult(input: input, rate: rate))
                     .frame(width: width - 40, height: 100)
@@ -27,23 +28,26 @@ struct Rate: View {
                     .minimumScaleFactor(0.05)
                     .lineLimit(1)
             }
+                TextField("1", text: $input)
+                .keyboardType(.numberPad)
+                .lineLimit(1)
+                .frame(width: 300, height: 100)
+                .font(.system(size: 30))
+                .multilineTextAlignment(.center)
+                .foregroundColor(.white)
+                .onAppear(perform: {
+                    self.input += "100"
+                })
+            }
             .frame(width: width, height: height * 0.382)
             .edgesIgnoringSafeArea(.top)
             HStack(alignment: .center) {
-                TextField("1", text: $input)
-                    .keyboardType(.numberPad)
-                    .lineLimit(1)
-                    .frame(width: 300, height: 100)
-                    .font(.system(size: 30))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
-                    .onAppear(perform: {
-                        self.input += "100"
-                    })
+                
+                BarChartView(data: ChartData(points: [8,23,54,32,12,37,7,23,43]), title: "Title", legend: "Full screen", form: ChartForm.echo)
             }
             .frame(width: width, height: height * 0.618)
             .background(Color.gray)
-            .cornerRadius(44)
+        .cornerRadius(44, antialiased: false)
         }
         .gesture(
             TapGesture()
@@ -105,6 +109,6 @@ func calcResult(input: String, rate: Double) -> String {
 
 struct Rate_Previews: PreviewProvider {
     static var previews: some View {
-        Rate()
+        Rate().previewDevice("iPhone 11")
     }
 }

@@ -9,15 +9,15 @@
 import SwiftUI
 
 public extension Color {
-    init(hexString: String) {
-        let hexString                 = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
-        let scanner                   = Scanner(string: hexString)
+    init(hexString2: String) {
+        let hexString2                 = hexString2.trimmingCharacters(in: .whitespacesAndNewlines)
+        let scanner                   = Scanner(string: hexString2)
         scanner.charactersToBeSkipped = CharacterSet(charactersIn: "#")
         
         var color: UInt64 = 0
         
         if scanner.scanHexInt64(&color) {
-            self.init(hex: color, useOpacity: hexString.count > 7)
+            self.init(hex: color, useOpacity: hexString2.count > 7)
         }
         else {
             self.init(hex: 0x000000)
