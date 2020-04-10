@@ -8,8 +8,12 @@
 
 import SwiftUI
 
+
 struct Rate: View {
     let rate: Double = 0.0657
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+
     
     @State var input: String = ""
     
@@ -17,10 +21,13 @@ struct Rate: View {
         VStack {
             HStack(alignment: .center) {
                 Text(calcResult(input: input, rate: rate))
-                    .font(.system(size: 50))
+                    .frame(width: width - 40, height: 100)
+                    .font(.system(size: 70))
+                    .scaledToFill()
+                    .minimumScaleFactor(0.05)
+                    .lineLimit(1)
             }
-            .frame(width: 500, height: 300)
-            .background(Color.blue)
+            .frame(width: width, height: height * 0.382)
             .edgesIgnoringSafeArea(.top)
             HStack(alignment: .center) {
                 TextField("1", text: $input)
@@ -33,9 +40,23 @@ struct Rate: View {
                     .onAppear(perform: {
                         self.input += "100"
                     })
-            }.background(Color.red)
-            Spacer()
+            }
+            .frame(width: width, height: height * 0.618)
+            .background(Color.gray)
+            .cornerRadius(44)
         }
+        .gesture(
+            TapGesture()
+                .onEnded { _ in
+                    UIApplication.shared.closeKeyboard()
+            }
+        )
+    }
+}
+
+extension UIApplication {
+    func closeKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
