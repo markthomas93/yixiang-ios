@@ -8,60 +8,83 @@
 
 import SwiftUI
 
+struct PostCardData {
+    var Icon: String
+    var Name: String
+    var Data: String
+    var Action: String
+    var Content: String
+    var Watch: String
+    var Coment: String
+}
+
+let Sample: PostCardData = PostCardData(Icon: "me", Name: "Echo", Data: "前天", Action: "分享了心情", Content: "大明什么都是自由。", Watch: "13", Coment: "313")
+
 struct PostCard: View {
+    var PostCardData: PostCardData
+    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
-                CircleAvator(imgName: "me", size: 35)
+                CircleAvator(imgName: PostCardData.Icon, size: 35)
                     .frame(height: 30)
                     .padding(.vertical, 5)
                 VStack(alignment: .leading) {
-                    Text("Echo").font(.system(size: 14))
-                    Text("昨天・发布了想法").foregroundColor(.gray)
+                    Text(PostCardData.Name).font(.system(size: 13))
+                    Text(PostCardData.Data + "・" + PostCardData.Action).foregroundColor(.gray)
                         .font(.system(size: 11))
                 }
                 Spacer()
             }
             .padding(.horizontal)
+            .padding(.top)
             HStack {
-                Text("时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Proあああああああ 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列")
+                Text(PostCardData.Content)
                     .foregroundColor(Color.black)
-                    .font(.system(size: 13))
+                    .font(.system(size: 15))
                     .lineLimit(nil)
                     .lineSpacing(2)
             }
             .padding(.horizontal, 15)
             HStack {
-                HStack {
-                    HStack {
-                    Image(systemName: "flame")
-                    .font(.system(size: 10, weight: .light))
-                        Text("2000")
-                        .font(.system(size: 10))
+                HStack(alignment: .center) {
+                    HStack(alignment: .center) {
+                        Image(systemName: "flame")
+                            .font(.system(size: 13))
+                        Text(PostCardData.Watch)
+                            .font(.system(size: 11))
                     }
-                    .foregroundColor(Color.gray)
-                    Image(systemName: "ellipsis")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 10, weight: .light))
-                        .padding(.leading, 20)
-                    Image(systemName: "ellipsis")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 10, weight: .light))
-                    .padding(.leading, 20)
-                }
+                    HStack(alignment: .center) {
+                        Image(systemName: "bubble.right")
+                            .font(.system(size: 13))
+                        Text(PostCardData.Coment)
+                            .font(.system(size: 11))
+                    }
+                }.foregroundColor(Color(hexString: "9A9A9A"))
                 Spacer()
                 Image(systemName: "ellipsis")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 10, weight: .light))
+                    .foregroundColor(Color(hexString: "9A9A9A"))
+                    .font(.system(size: 13, weight: .light))
             }
             .padding(.horizontal, 20)
+            .padding(.bottom)
         }.background(Color.white)
-            .padding(.top, 5)
+            .cornerRadius(3)
+            .padding(.horizontal, 10)
+    }
+}
+
+struct debug: View {
+    var body: some View {
+        ZStack {
+            Spacer().background(Color.gray).frame(width: 400, height: 500)
+            PostCard(PostCardData: Sample)
+        }
     }
 }
 
 struct PostCard_Previews: PreviewProvider {
     static var previews: some View {
-        PostCard()
+        debug()
     }
 }

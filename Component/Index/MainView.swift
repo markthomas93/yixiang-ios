@@ -12,15 +12,7 @@ struct MainView: View {
     var body: some View {
             VStack {
                 List {
-                    PostCard()
-                    PostCard()
-                    PostCard()
-                    PostCard()
-                    PostCard()
-                    PostCard()
-                    PostCard()
-                    PostCard()
-                    PostCard()
+                    Text("")
                 }
             }
         

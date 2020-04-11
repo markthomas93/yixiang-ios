@@ -16,11 +16,6 @@ struct BackgroundColor: View {
             Spacer()
                 .background(Color(hexString: "FF7F6A"))
                 .edgesIgnoringSafeArea(.all)
-            Spacer()
-                .background(Color.white)
-                .cornerRadius(20, antialiased: false)
-                .padding(.top, 75)
-                .edgesIgnoringSafeArea(.bottom)
         }.onAppear {
             print("Home On Appear")
             let controller = UIApplication.shared.windows[0].rootViewController as? MyHostingController
@@ -64,17 +59,29 @@ struct HeaderItem: View {
     }
 }
 
+let Sample4: PostCardData = PostCardData(Icon: "me", Name: "Echo", Data: "前天", Action: "分享了心情", Content: "大明什么都是自由。", Watch: "4", Coment: "313")
+
+let Sample2: PostCardData = PostCardData(Icon: "me", Name: "Echo", Data: "昨天", Action: "发布了想法", Content: "常有人感叹中年危机来得猝不及防，但其实在它到来之前，你有无数次让它绕开你的机会，但也许正是因为你选择了安逸，才给了它可乘之机。", Watch: "4", Coment: "410")
+
+let Sample3: PostCardData = PostCardData(Icon: "me", Name: "Echo", Data: "刚刚", Action: "分享了心情", Content: "“真正的安稳是历经世事后的淡薄，你还没有见过世界，就想隐退山林，到头来只会是井底之蛙。”", Watch: "13", Coment: "72")
+
 struct Index: View {
     var body: some View {
         ZStack {
             BackgroundColor()
             HeaderItem()
+
+            ScrollView {
             VStack {
-            PostCard()
-                PostCard()
-                PostCard()
-                PostCard()
+                   PostCard(PostCardData: Sample4)
+                PostCard(PostCardData: Sample2)
+                PostCard(PostCardData: Sample3)
+                }
             }
+            .background(Color(hexString: "F6F6F6"))
+            .cornerRadius(20, antialiased: false)
+            .padding(.top, 75)
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
 }
