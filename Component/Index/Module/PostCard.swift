@@ -25,16 +25,16 @@ struct PostCard: View {
             .padding(.horizontal)
             HStack {
                 Text("时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列")
-                    .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
-                    .font(.system(size: 12))
-                    .lineSpacing(5)
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 13))
+                    .lineLimit(nil)
+                    .lineSpacing(2)
                 Spacer()
             }
             .padding(.horizontal)
             HStack {
                 Spacer()
-                Image(systemName: "bubble.right")
-                    .scaleEffect(0.7)
+                Image(systemName: "")
                     .foregroundColor(Color.gray)
             }
             .padding(.horizontal)
