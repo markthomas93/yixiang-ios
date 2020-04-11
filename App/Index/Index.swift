@@ -18,7 +18,7 @@ struct BackgroundColor: View {
                 .edgesIgnoringSafeArea(.all)
             Spacer()
                 .background(Color.white)
-                .cornerRadius(30, antialiased: false)
+                .cornerRadius(20, antialiased: false)
                 .padding(.top, 75)
                 .edgesIgnoringSafeArea(.bottom)
         }.onAppear {
@@ -29,11 +29,28 @@ struct BackgroundColor: View {
     }
 }
 
+struct PagePicker: View {
+    @State var currentPage: Int = 2
+    var body: some View {
+        HStack {
+            Image(systemName: currentPage == 1 ? "circle.fill" : "circle")
+            Image(systemName: currentPage == 2 ? "circle.fill" : "circle")
+            Image(systemName: currentPage == 3 ? "circle.fill" : "circle")
+            Spacer()
+        }.padding(.horizontal)
+            .font(.system(size: 5))
+            .foregroundColor(Color.white)
+            .offset(x: 10, y: -15)
+    }
+}
+
 struct HeaderItem: View {
     var body: some View {
         VStack {
             HStack {
-                Text("主页").title()
+                VStack {
+                    Text("主页").title()
+                }
                 Spacer()
                 Image(systemName: "plus.circle")
                     .foregroundColor(Color.white)
@@ -41,6 +58,7 @@ struct HeaderItem: View {
                     .font(.system(size: 24, weight: .regular))
             }
             .padding(.horizontal)
+            PagePicker()
             Spacer()
         }
     }
@@ -51,6 +69,12 @@ struct Index: View {
         ZStack {
             BackgroundColor()
             HeaderItem()
+            VStack {
+            PostCard()
+                PostCard()
+                PostCard()
+                PostCard()
+            }
         }
     }
 }

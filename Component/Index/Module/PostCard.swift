@@ -24,21 +24,37 @@ struct PostCard: View {
             }
             .padding(.horizontal)
             HStack {
-                Text("时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列")
+                Text("时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Proあああああああ 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列")
                     .foregroundColor(Color.black)
                     .font(.system(size: 13))
                     .lineLimit(nil)
                     .lineSpacing(2)
-                Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 15)
             HStack {
-                Spacer()
-                Image(systemName: "")
+                HStack {
+                    HStack {
+                    Image(systemName: "flame")
+                    .font(.system(size: 10, weight: .light))
+                        Text("2000")
+                        .font(.system(size: 10))
+                    }
                     .foregroundColor(Color.gray)
+                    Image(systemName: "ellipsis")
+                    .foregroundColor(Color.gray)
+                    .font(.system(size: 10, weight: .light))
+                        .padding(.leading, 20)
+                    Image(systemName: "ellipsis")
+                    .foregroundColor(Color.gray)
+                    .font(.system(size: 10, weight: .light))
+                    .padding(.leading, 20)
+                }
+                Spacer()
+                Image(systemName: "ellipsis")
+                    .foregroundColor(Color.gray)
+                    .font(.system(size: 10, weight: .light))
             }
-            .padding(.horizontal)
-            .padding(.bottom, 5)
+            .padding(.horizontal, 20)
         }.background(Color.white)
             .padding(.top, 5)
     }
