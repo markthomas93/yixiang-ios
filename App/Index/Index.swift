@@ -67,22 +67,24 @@ let Sample3: PostCardData = PostCardData(Icon: "me", Name: "Echo", Data: "刚刚
 
 struct Index: View {
     var body: some View {
-        ZStack {
-            BackgroundColor()
-            HeaderItem()
-
-            ScrollView {
-            VStack {
-                   PostCard(PostCardData: Sample4)
-                PostCard(PostCardData: Sample2)
-                PostCard(PostCardData: Sample3)
+        NavigationView {
+            ZStack {
+                BackgroundColor()
+                HeaderItem()
+                
+                ScrollView {
+                    VStack {
+                        PostCard(PostCardData: Sample4)
+                        PostCard(PostCardData: Sample2)
+                        PostCard(PostCardData: Sample3)
+                    }
                 }
+                .background(Color(hexString: "F6F6F6"))
+                .cornerRadius(20, antialiased: false)
+                .padding(.top, 75)
+                .edgesIgnoringSafeArea(.bottom)
             }
-            .background(Color(hexString: "F6F6F6"))
-            .cornerRadius(20, antialiased: false)
-            .padding(.top, 75)
-            .edgesIgnoringSafeArea(.bottom)
-        }
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 

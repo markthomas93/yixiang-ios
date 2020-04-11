@@ -18,6 +18,14 @@ struct PostCardData {
     var Coment: String
 }
 
+extension HStack {
+    func navigationLink(destination: Text) -> some View {
+        NavigationLink(destination: destination) {
+            self
+        }
+    }
+}
+
 let Sample: PostCardData = PostCardData(Icon: "me", Name: "Echo", Data: "前天", Action: "分享了心情", Content: "大明什么都是自由。", Watch: "13", Coment: "313")
 
 struct PostCard: View {
@@ -26,9 +34,11 @@ struct PostCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                CircleAvator(imgName: PostCardData.Icon, size: 35)
-                    .frame(height: 30)
-                    .padding(.vertical, 5)
+                NavigationLink(destination: Text("icon")) {
+                    CircleAvator(imgName: PostCardData.Icon, size: 35)
+                        .frame(height: 30)
+                        .padding(.vertical, 5)
+                }
                 VStack(alignment: .leading) {
                     Text(PostCardData.Name).font(.system(size: 13))
                     Text(PostCardData.Data + "・" + PostCardData.Action).foregroundColor(.gray)
@@ -54,12 +64,13 @@ struct PostCard: View {
                         Text(PostCardData.Watch)
                             .font(.system(size: 11))
                     }
-                    HStack(alignment: .center) {
-                        Image(systemName: "bubble.right")
-                            .font(.system(size: 13))
-                        Text(PostCardData.Coment)
-                            .font(.system(size: 11))
-                    }
+                        HStack(alignment: .center) {
+                            Image(systemName: "bubble.right")
+                                .font(.system(size: 13))
+                            Text(PostCardData.Coment)
+                                .font(.system(size: 11))
+                        }.navigationLink(destination: Text("a"))
+                    
                 }.foregroundColor(Color(hexString: "9A9A9A"))
                 Spacer()
                 Image(systemName: "ellipsis")
