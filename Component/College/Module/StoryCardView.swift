@@ -24,6 +24,7 @@ struct StoryCardView: View {
     @State var isShow: Bool = false
     @State var isOnTap: Bool = false
     var body: some View {
+        NavigationView {
         ZStack {
             ScrollView {
                 VStack {
@@ -75,6 +76,7 @@ struct StoryCardView: View {
         }
         .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 225, idealHeight: 450 , maxHeight: 450)
     .statusBar(hidden: isShow)
+    }
     }
 }
 
