@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+let width = UIScreen.main.bounds.width
+
 struct BackgroundColor: View {
     var body: some View {
         ZStack {
@@ -17,12 +19,29 @@ struct BackgroundColor: View {
             Spacer()
                 .background(Color.white)
                 .cornerRadius(30, antialiased: false)
-                .padding(.top, 44)
+                .padding(.top, 75)
                 .edgesIgnoringSafeArea(.bottom)
         }.onAppear {
-          print("Home On Appear")
-          let controller = UIApplication.shared.windows[0].rootViewController as? MyHostingController
-          controller?.statusBarStyle = .lightContent
+            print("Home On Appear")
+            let controller = UIApplication.shared.windows[0].rootViewController as? MyHostingController
+            controller?.statusBarStyle = .lightContent
+        }
+    }
+}
+
+struct HeaderItem: View {
+    var body: some View {
+        VStack {
+            HStack {
+                Text("主页").title()
+                Spacer()
+                Image(systemName: "plus.circle")
+                    .foregroundColor(Color.white)
+                    .padding(.top, 30)
+                    .font(.system(size: 24, weight: .regular))
+            }
+            .padding(.horizontal)
+            Spacer()
         }
     }
 }
@@ -31,6 +50,7 @@ struct Index: View {
     var body: some View {
         ZStack {
             BackgroundColor()
+            HeaderItem()
         }
     }
 }

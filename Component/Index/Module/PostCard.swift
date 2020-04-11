@@ -8,37 +8,21 @@
 
 import SwiftUI
 
-struct PostCardData {
-    var image: String
-    var userName: String
-    var content: String
-    var commentNum: Int
-    var contentImage: String
-}
-
 struct PostCard: View {
     var body: some View {
         VStack {
             HStack {
-                CircleAvator(imgName: "me", size: 30)
+                CircleAvator(imgName: "me", size: 35)
                     .frame(height: 30)
                     .padding(.vertical, 5)
-                Text("Echo")
-                    .fontWeight(.semibold)
-                Spacer()
-                Image(systemName: "ellipsis")
-                    .scaleEffect(0.7)
-                    .foregroundColor(.gray)
-            }
-            .padding(.horizontal)
-            HStack {
-                Text("大家怎么看新的 iPad Pro")
-                    .font(.system(size: 15))
-                    .bold()
+                VStack(alignment: .leading) {
+                    Text("Echo").font(.system(size: 14))
+                    Text("昨天・发布了想法").foregroundColor(.gray)
+                        .font(.system(size: 11))
+                }
                 Spacer()
             }
             .padding(.horizontal)
-            .padding(.bottom, 5)
             HStack {
                 Text("时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列时隔一年半，苹果再次更新 iPad Pro 系列")
                     .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
